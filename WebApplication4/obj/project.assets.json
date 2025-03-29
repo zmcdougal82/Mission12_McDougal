@@ -3255,11 +3255,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/zackmcdougal/Desktop/gpg/Mission11_McDougal/WebApplication4/WebApplication4.csproj",
+      "projectUniqueName": "/Users/zackmcdougal/Mission12_McDougal/WebApplication4/WebApplication4.csproj",
       "projectName": "WebApplication4",
-      "projectPath": "/Users/zackmcdougal/Desktop/gpg/Mission11_McDougal/WebApplication4/WebApplication4.csproj",
+      "projectPath": "/Users/zackmcdougal/Mission12_McDougal/WebApplication4/WebApplication4.csproj",
       "packagesPath": "/Users/zackmcdougal/.nuget/packages/",
-      "outputPath": "/Users/zackmcdougal/Desktop/gpg/Mission11_McDougal/WebApplication4/obj/",
+      "outputPath": "/Users/zackmcdougal/Mission12_McDougal/WebApplication4/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/zackmcdougal/.nuget/NuGet/NuGet.Config"
