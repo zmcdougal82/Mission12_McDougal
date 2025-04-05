@@ -22,19 +22,20 @@ jobs:
       # Build the React app and copy the build output to a new directory
       - name: Build React App
         run: |
-          cd WebApplication4
+          cd WebApplication4/bookstore-client
           # Set CI=false to prevent treating warnings as errors
           export CI=false
+          npm ci
           npm run build
           # Create a new directory for the static web app
-          mkdir -p ../static-web-app
+          mkdir -p ../../static-web-app
           # Copy the build output to the new directory
-          cp -r bookstore-client/build/* ../static-web-app/
+          cp -r build/* ../../static-web-app/
           # Double-check that configuration files are in the new directory
-          cp -f bookstore-client/public/routes.json ../static-web-app/
-          cp -f bookstore-client/public/staticwebapp.config.json ../static-web-app/
+          cp -f public/routes.json ../../static-web-app/
+          cp -f public/staticwebapp.config.json ../../static-web-app/
           echo "Contents of static-web-app directory:"
-          ls -la ../static-web-app
+          ls -la ../../static-web-app
           
       # Note: This deployment only includes the frontend React app.
       # The ASP.NET Core API needs to be deployed separately to an Azure App Service
