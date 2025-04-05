@@ -4,7 +4,7 @@
     "bootstrap": "^5.3.3"
   },
   "scripts": {
-    "build": "cd bookstore-client && npm ci && npm run build && cp public/routes.json build/",
-    "build:azure": "cd bookstore-client && npm ci && npm run build && cp public/routes.json build/"
+    "build": "cd bookstore-client && npm ci && npm run build && cp -f public/routes.json build/ && cp -f public/staticwebapp.config.json build/ && ls -la build/",
+    "build:azure": "cd bookstore-client && npm ci && npm run build && cp -f public/routes.json build/ && cp -f public/staticwebapp.config.json build/ && ls -la build/"
   }
 }

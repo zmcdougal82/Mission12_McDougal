@@ -19,6 +19,17 @@ jobs:
         with:
           submodules: true
           
+      # Build the React app and ensure configuration files are in the build directory
+      - name: Build React App
+        run: |
+          cd WebApplication4
+          npm run build
+          # Double-check that configuration files are in the build directory
+          cp -f bookstore-client/public/routes.json bookstore-client/build/
+          cp -f bookstore-client/public/staticwebapp.config.json bookstore-client/build/
+          echo "Contents of build directory:"
+          ls -la bookstore-client/build
+          
       # Note: This deployment only includes the frontend React app.
       # The ASP.NET Core API needs to be deployed separately to an Azure App Service
       # or converted to Azure Functions to work with Azure Static Web Apps.
@@ -32,8 +43,7 @@ jobs:
           app_location: "WebApplication4"
           api_location: ""
           output_location: "bookstore-client/build"
-          routes_location: ""
-          skip_app_build: false
+          skip_app_build: true
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
