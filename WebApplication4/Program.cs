@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.WithOrigins("http://localhost:3000")
+        policy.WithOrigins("http://localhost:3000", "https://purple-dune-0bd76be0f.6.azurestaticapps.net")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
