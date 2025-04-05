@@ -18,17 +18,28 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: true
-      - name: Build And Deploy
+          
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Build React App
+        run: |
+          cd WebApplication4/bookstore-client
+          npm ci
+          npm run build
+          
+      - name: Deploy to Azure Static Web Apps
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: "dd46f990a76592c16dc85f28cde2aff6849e33d3851fed4d2e4cf6de348d53f806-9eb09e23-19cf-4da5-ad62-f76c52eeda9000f09070bd76be0f"
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "./WebApplication4/bookstore-client"
-          api_location: ""
-          app_build_command: "npm run build"
+          app_location: "WebApplication4/bookstore-client"
           output_location: "build"
+          skip_app_build: true
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
