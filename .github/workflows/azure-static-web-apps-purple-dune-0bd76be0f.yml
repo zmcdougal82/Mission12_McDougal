@@ -19,51 +19,25 @@ jobs:
         with:
           submodules: true
           lfs: false
-      - name: Set up project structure
-        run: |
-          # Create the expected static-web-app directory and copy client files
-          mkdir -p static-web-app
-          cp -r WebApplication4/bookstore-client/* static-web-app/
 
-          # Create the API connections directory and database configuration
-          mkdir -p swa-db-connections
-          cp -f WebApplication4/bookstore-client/build/staticwebapp.database.config.json swa-db-connections/
-          
-          # Ensure configuration files are in the right place
-          mkdir -p static-web-app/build
-          cp -f WebApplication4/bookstore-client/build/routes.json static-web-app/build/
-          cp -f WebApplication4/bookstore-client/build/staticwebapp.config.json static-web-app/build/
-          cp -f WebApplication4/bookstore-client/build/staticwebapp.database.config.json static-web-app/build/
-          
-          # Copy the API
-          cp -r WebApplication4 api
-          
-          # Copy the SQLite database
-          mkdir -p api/Data
-          cp -f WebApplication4/Data/Bookstore.sqlite api/Data/
-          
-          # Show the structure for debugging
-          echo "=== Project Structure ==="
-          find . -type f -name "routes.json" | sort
-          find . -type f -name "staticwebapp*.json" | sort
-          ls -la static-web-app
-          ls -la swa-db-connections
-          ls -la api/Data
-      - name: Build And Deploy
+      - name: Build React App
+        run: |
+          cd WebApplication4/bookstore-client
+          npm ci
+          npm run build
+
+      - name: Deploy to Azure Static Web Apps
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: d176ac05541ec42b80826ff11ed9f669d30381bdb5a30b60be3860f7db0f509a06-44edb073-b90d-425c-b1c4-66e796ef5d4300f09070bd76be0f
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "static-web-app" # App source code path
-          api_location: "api" # Api source code path - optional
-          data_api_location: "swa-db-connections" # Data API source code path
-          routes_location: "static-web-app/public" # Path to routes.json file
-          config_file_location: "static-web-app/public" # Path to staticwebapp.config.json file
-          output_location: "build" # Built app content directory - optional
+          ###### Repository/Build Configurations ######
+          app_location: "./WebApplication4/bookstore-client" # App source code path
+          api_location: "" # We're using an external App Service for API
+          output_location: "build" # Built app content directory
+          skip_api_build: true # Skip API build since we're using external API
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
