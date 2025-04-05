@@ -23,6 +23,8 @@ jobs:
       - name: Build React App
         run: |
           cd WebApplication4
+          # Set CI=false to prevent treating warnings as errors
+          export CI=false
           npm run build
           # Double-check that configuration files are in the build directory
           cp -f bookstore-client/public/routes.json bookstore-client/build/

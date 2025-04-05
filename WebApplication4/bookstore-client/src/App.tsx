@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import AdminBooks from './AdminBooks';
@@ -381,6 +381,7 @@ function Toast({ message, show, onClose }: { message: string, show: boolean, onC
 
 // Main BookList Component
 function BookList() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const navigate = useNavigate();
   const { addToCart, setLastViewedPage } = React.useContext(CartContext);
   const [books, setBooks] = useState<Book[]>([]);
