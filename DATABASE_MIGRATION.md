@@ -1,4 +1,4 @@
-# Database Migration Guide for Azure Static Web Apps
+## Database Migration Guide for Azure Static Web Apps
 
 This document outlines how database files are handled in the Azure Static Web Apps deployment.
 
