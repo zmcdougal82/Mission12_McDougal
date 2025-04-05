@@ -6,8 +6,20 @@ using System.IO;
 var builder = WebApplication.CreateBuilder(args);
 
 // Register the SQLite DbContext using the connection string
+string connectionString = builder.Configuration.GetConnectionString("BookStoreConnection");
+    
+// Ensure database path is correct for the environment
+if (!Path.IsPathRooted(connectionString.Replace("Data Source=", "")))
+{
+    // Extract the relative path part
+    string dbPath = connectionString.Replace("Data Source=", "");
+    // Create path relative to content root for consistent behavior in all environments
+    string resolvedPath = Path.Combine(builder.Environment.ContentRootPath, dbPath);
+    connectionString = $"Data Source={resolvedPath}";
+}
+
 builder.Services.AddDbContext<BookStoreContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("BookStoreConnection")));
+    options.UseSqlite(connectionString));
 
 // Add services to the container
 builder.Services.AddControllersWithViews();
@@ -17,7 +29,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "https://purple-dune-0bd76be0f.6.azurestaticapps.net")
+        policy.AllowAnyOrigin()
               .AllowAnyHeader()
               .AllowAnyMethod();
     });

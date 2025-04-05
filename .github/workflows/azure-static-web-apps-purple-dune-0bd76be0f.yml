@@ -3,11 +3,11 @@ name: Azure Static Web Apps CI/CD
 on:
   push:
     branches:
-      - phase6-admin-features
+      - phase-6
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - phase6-admin-features
+      - phase-6
 
 jobs:
   build_and_deploy_job:
