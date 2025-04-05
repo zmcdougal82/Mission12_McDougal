@@ -44,7 +44,7 @@ function AdminBooks() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/books/categories`);
+        const response = await axios.get(`${API_URL}/books/categories`);
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -57,7 +57,7 @@ function AdminBooks() {
 
   const fetchBooks = useCallback(async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/books`, {
+      const response = await axios.get(`${API_URL}/books`, {
         params: { 
           page, 
           pageSize, 
@@ -120,7 +120,7 @@ function AdminBooks() {
   const handleAddBook = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post(`${API_URL}/api/books`, newBook);
+      await axios.post(`${API_URL}/books`, newBook);
       setNewBook({ ...emptyBook });
       setIsAdding(false);
       fetchBooks();
@@ -137,7 +137,7 @@ function AdminBooks() {
     if (!editingBook) return;
     
     try {
-      await axios.put(`${API_URL}/api/books/${editingBook.bookId}`, editingBook);
+      await axios.put(`${API_URL}/books/${editingBook.bookId}`, editingBook);
       setEditingBook(null);
       fetchBooks();
       showAlert('success', 'Book updated successfully');
@@ -152,7 +152,7 @@ function AdminBooks() {
     if (!window.confirm('Are you sure you want to delete this book?')) return;
     
     try {
-      await axios.delete(`${API_URL}/api/books/${bookId}`);
+      await axios.delete(`${API_URL}/books/${bookId}`);
       fetchBooks();
       showAlert('success', 'Book deleted successfully');
     } catch (error) {
