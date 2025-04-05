@@ -13,9 +13,35 @@ if (!Path.IsPathRooted(connectionString.Replace("Data Source=", "")))
 {
     // Extract the relative path part
     string dbPath = connectionString.Replace("Data Source=", "");
-    // Create path relative to content root for consistent behavior in all environments
-    string resolvedPath = Path.Combine(builder.Environment.ContentRootPath, dbPath);
-    connectionString = $"Data Source={resolvedPath}";
+    
+    // Special handling for Azure Static Web Apps
+    var isAzure = Environment.GetEnvironmentVariable("WEBSITE_INSTANCE_ID") != null;
+    
+    if (isAzure)
+    {
+        // Use a path in the writable storage area for Azure Static Web Apps
+        string resolvedPath = Path.Combine("/data", dbPath);
+        connectionString = $"Data Source={resolvedPath}";
+        
+        // Ensure the directory exists
+        Directory.CreateDirectory(Path.GetDirectoryName(resolvedPath));
+        
+        // If database doesn't exist in the writable location, copy it there
+        if (!File.Exists(resolvedPath))
+        {
+            string sourceDbPath = Path.Combine(builder.Environment.ContentRootPath, dbPath);
+            if (File.Exists(sourceDbPath))
+            {
+                File.Copy(sourceDbPath, resolvedPath, true);
+            }
+        }
+    }
+    else
+    {
+        // Local development - use the content root path
+        string resolvedPath = Path.Combine(builder.Environment.ContentRootPath, dbPath);
+        connectionString = $"Data Source={resolvedPath}";
+    }
 }
 
 builder.Services.AddDbContext<BookStoreContext>(options =>
