@@ -12,7 +12,6 @@ export const isRunningOnAzure = window.location.hostname.includes('azurestaticap
 console.log('Running on Azure:', isRunningOnAzure);
 
 // Set baseURL for API requests
-export const API_URL = isProduction || isRunningOnAzure
-  ? 'https://bookstoremcdougalbackend.azurewebsites.net/api'
-  : '/api';
+// The route definition in staticwebapp.config.json handles the redirection to the actual backend
+export const API_URL = '/api';
 console.log('API URL:', API_URL);

@@ -3,9 +3,12 @@
     "rewrite": "/index.html",
     "exclude": ["/images/*.{png,jpg,gif}", "/css/*", "/js/*"]
   },
-  "platform": {
-    "apiRuntime": "dotnet-isolated:9.0"
-  },
+  "routes": [
+    {
+      "route": "/api/*",
+      "rewrite": "https://bookstoremcdougalbackend.azurewebsites.net/api/*"
+    }
+  ],
   "responseOverrides": {
     "404": {
       "rewrite": "/index.html",
