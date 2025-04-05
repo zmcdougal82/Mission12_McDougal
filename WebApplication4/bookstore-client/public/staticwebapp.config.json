@@ -4,7 +4,7 @@
     "exclude": ["/images/*.{png,jpg,gif}", "/css/*", "/js/*"]
   },
   "platform": {
-    "apiRuntime": "dotnet:9.0"
+    "apiRuntime": "dotnet-isolated:9.0"
   },
   "responseOverrides": {
     "404": {
