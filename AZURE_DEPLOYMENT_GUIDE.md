@@ -13,7 +13,7 @@ The application consists of:
 ### GitHub Workflow
 
 The GitHub workflow file (`.github/workflows/azure-static-web-apps-purple-dune-0bd76be0f.yml`) has been configured to:
-- Target the `phase-6` branch for deployment
+- Target the `phase6-admin-features` branch for deployment
 - Deploy the React app from `./WebApplication4/bookstore-client`
 - Deploy the API from `./WebApplication4`
 - Use the `build` directory as the output location for the React app
@@ -47,12 +47,12 @@ The React frontend has been configured with:
 To deploy this application to Azure Static Web Apps:
 
 1. **Create a Repository**:
-   - Push this code to GitHub under a branch named `phase-6`
+   - Push this code to GitHub under a branch named `phase6-admin-features`
 
 2. **Create Azure Static Web App**:
    - In the Azure Portal, create a new Static Web App resource
    - Link it to your GitHub repository
-   - Select the `phase-6` branch
+   - Select the `phase6-admin-features` branch
    - Use the following build settings:
      - App location: `./WebApplication4/bookstore-client`
      - API location: `./WebApplication4`
