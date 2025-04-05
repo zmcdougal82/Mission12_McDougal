@@ -414,8 +414,8 @@ function BookList() {
     const fetchCategories = async () => {
       try {
         // Log the request URL for debugging
-        console.log('Fetching categories from: http://localhost:5299/api/books/categories');
-        const response = await axios.get('http://localhost:5299/api/books/categories');
+        console.log('Fetching categories from: /api/books/categories');
+        const response = await axios.get('/api/books/categories');
         console.log('Categories response:', response.data);
         setCategories(response.data);
       } catch (error) {
@@ -432,8 +432,8 @@ function BookList() {
 
   const fetchBooks = useCallback(async () => {
     try {
-      // Use the full URL to the API
-      const response = await axios.get('http://localhost:5299/api/books', {
+      // Use relative URL to the API
+      const response = await axios.get('/api/books', {
         params: { 
           page, 
           pageSize, 
