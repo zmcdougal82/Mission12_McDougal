@@ -25,7 +25,7 @@ jobs:
           azure_static_web_apps_api_token: "dd46f990a76592c16dc85f28cde2aff6849e33d3851fed4d2e4cf6de348d53f806-9eb09e23-19cf-4da5-ad62-f76c52eeda9000f09070bd76be0f"
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "WebApplication4/bookstore-client"
+          app_location: "./WebApplication4/bookstore-client"
           api_location: ""
           app_build_command: "npm run build"
           output_location: "build"
