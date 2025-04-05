@@ -5,10 +5,10 @@
   },
   "routes": [
     {
-      "route": "/api/*",
+      "route": "/books/*",
       "methods": ["GET", "POST", "PUT", "DELETE"],
       "allowedRoles": ["anonymous"],
-      "backendUri": "https://bookstoremcdougalbackend.azurewebsites.net/api"
+      "backendUri": "https://bookstoremcdougalbackend.azurewebsites.net/api/books"
     }
   ],
   "responseOverrides": {
