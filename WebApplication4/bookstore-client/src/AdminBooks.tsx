@@ -43,7 +43,7 @@ function AdminBooks() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('/api/books/categories');
+        const response = await axios.get('http://localhost:5299/api/books/categories');
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -56,7 +56,7 @@ function AdminBooks() {
 
   const fetchBooks = useCallback(async () => {
     try {
-      const response = await axios.get('/api/books', {
+      const response = await axios.get('http://localhost:5299/api/books', {
         params: { 
           page, 
           pageSize, 
@@ -119,7 +119,7 @@ function AdminBooks() {
   const handleAddBook = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('/api/books', newBook);
+      await axios.post('http://localhost:5299/api/books', newBook);
       setNewBook({ ...emptyBook });
       setIsAdding(false);
       fetchBooks();
@@ -136,7 +136,7 @@ function AdminBooks() {
     if (!editingBook) return;
     
     try {
-      await axios.put(`/api/books/${editingBook.bookId}`, editingBook);
+      await axios.put(`http://localhost:5299/api/books/${editingBook.bookId}`, editingBook);
       setEditingBook(null);
       fetchBooks();
       showAlert('success', 'Book updated successfully');
@@ -151,7 +151,7 @@ function AdminBooks() {
     if (!window.confirm('Are you sure you want to delete this book?')) return;
     
     try {
-      await axios.delete(`/api/books/${bookId}`);
+      await axios.delete(`http://localhost:5299/api/books/${bookId}`);
       fetchBooks();
       showAlert('success', 'Book deleted successfully');
     } catch (error) {
