@@ -26,7 +26,8 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "WebApplication4/bookstore-client"
-          api_location: "WebApplication4"
+          api_location: ""
+          app_build_command: "npm run build"
           output_location: "build"
 
   close_pull_request_job:
