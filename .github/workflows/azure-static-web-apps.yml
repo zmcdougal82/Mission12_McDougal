@@ -44,7 +44,7 @@ jobs:
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: "dd46f990a76592c16dc85f28cde2aff6849e33d3851fed4d2e4cf6de348d53f806-9eb09e23-19cf-4da5-ad62-f76c52eeda9000f09070bd76be0f"
+          azure_static_web_apps_api_token: "d176ac05541ec42b80826ff11ed9f669d30381bdb5a30b60be3860f7db0f509a06-44edb073-b90d-425c-b1c4-66e796ef5d4300f09070bd76be0f"
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "static-web-app"
@@ -61,5 +61,5 @@ jobs:
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: "dd46f990a76592c16dc85f28cde2aff6849e33d3851fed4d2e4cf6de348d53f806-9eb09e23-19cf-4da5-ad62-f76c52eeda9000f09070bd76be0f"
+          azure_static_web_apps_api_token: "d176ac05541ec42b80826ff11ed9f669d30381bdb5a30b60be3860f7db0f509a06-44edb073-b90d-425c-b1c4-66e796ef5d4300f09070bd76be0f"
           action: "close"
