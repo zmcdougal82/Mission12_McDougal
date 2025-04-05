@@ -29,6 +29,8 @@ jobs:
           cd WebApplication4/bookstore-client
           npm ci
           npm run build
+          # Ensure routes.json is in the build directory
+          cp public/routes.json build/
           
       # Note: This deployment only includes the frontend React app.
       # The ASP.NET Core API needs to be deployed separately to an Azure App Service
@@ -40,10 +42,11 @@ jobs:
           azure_static_web_apps_api_token: "dd46f990a76592c16dc85f28cde2aff6849e33d3851fed4d2e4cf6de348d53f806-9eb09e23-19cf-4da5-ad62-f76c52eeda9000f09070bd76be0f"
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "./WebApplication4/bookstore-client"
+          app_location: "./WebApplication4/bookstore-client/build"
           api_location: ""
-          output_location: "build"
+          output_location: ""
           skip_app_build: true
+          app_build_command: ""
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
