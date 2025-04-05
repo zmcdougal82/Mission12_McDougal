@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import { API_URL } from './config';
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import AdminBooks from './AdminBooks';
 
@@ -414,8 +415,8 @@ function BookList() {
     const fetchCategories = async () => {
       try {
         // Log the request URL for debugging
-        console.log('Fetching categories from: /api/books/categories');
-        const response = await axios.get('/api/books/categories');
+        console.log('Fetching categories from:', `${API_URL}/api/books/categories`);
+        const response = await axios.get(`${API_URL}/api/books/categories`);
         console.log('Categories response:', response.data);
         setCategories(response.data);
       } catch (error) {
@@ -432,8 +433,8 @@ function BookList() {
 
   const fetchBooks = useCallback(async () => {
     try {
-      // Use relative URL to the API
-      const response = await axios.get('/api/books', {
+      // Use the API URL from config
+      const response = await axios.get(`${API_URL}/api/books`, {
         params: { 
           page, 
           pageSize, 
