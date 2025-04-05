@@ -19,18 +19,22 @@ jobs:
         with:
           submodules: true
           
-      # Build the React app and ensure configuration files are in the build directory
+      # Build the React app and copy the build output to a new directory
       - name: Build React App
         run: |
           cd WebApplication4
           # Set CI=false to prevent treating warnings as errors
           export CI=false
           npm run build
-          # Double-check that configuration files are in the build directory
-          cp -f bookstore-client/public/routes.json bookstore-client/build/
-          cp -f bookstore-client/public/staticwebapp.config.json bookstore-client/build/
-          echo "Contents of build directory:"
-          ls -la bookstore-client/build
+          # Create a new directory for the static web app
+          mkdir -p ../static-web-app
+          # Copy the build output to the new directory
+          cp -r bookstore-client/build/* ../static-web-app/
+          # Double-check that configuration files are in the new directory
+          cp -f bookstore-client/public/routes.json ../static-web-app/
+          cp -f bookstore-client/public/staticwebapp.config.json ../static-web-app/
+          echo "Contents of static-web-app directory:"
+          ls -la ../static-web-app
           
       # Note: This deployment only includes the frontend React app.
       # The ASP.NET Core API needs to be deployed separately to an Azure App Service
@@ -42,9 +46,9 @@ jobs:
           azure_static_web_apps_api_token: "dd46f990a76592c16dc85f28cde2aff6849e33d3851fed4d2e4cf6de348d53f806-9eb09e23-19cf-4da5-ad62-f76c52eeda9000f09070bd76be0f"
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "WebApplication4/bookstore-client"
+          app_location: "static-web-app"
           api_location: ""
-          output_location: "build"
+          output_location: ""
           skip_app_build: true
 
   close_pull_request_job:
