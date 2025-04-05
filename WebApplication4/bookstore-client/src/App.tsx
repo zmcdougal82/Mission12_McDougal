@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import AdminBooks from './AdminBooks';
 
 interface Book {
   bookId: number;
@@ -697,6 +698,9 @@ function AppLayout() {
               <li className="nav-item">
                 <Link className="nav-link" to="/cart">Cart</Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/adminbooks">Admin</Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -705,6 +709,7 @@ function AppLayout() {
       <Routes>
         <Route path="/" element={<BookList />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/adminbooks" element={<AdminBooks />} />
       </Routes>
     </div>
   );
