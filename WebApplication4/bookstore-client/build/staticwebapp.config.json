@@ -6,7 +6,7 @@
   "routes": [
     {
       "route": "/api/*",
-      "rewrite": "https://bookstoremcdougalbackend.azurewebsites.net/api/*"
+      "rewrite": "https://BookstoreMcDougalBackend.azurewebsites.net/api/*"
     }
   ],
   "responseOverrides": {
